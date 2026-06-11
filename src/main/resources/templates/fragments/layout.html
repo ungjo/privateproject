@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>private project</title>
+	<link rel="stylesheet" href="./common.css">
+</head>
+<body>
+    <nav th:fragment="nav" class="nav-bar">
+	    <!-- <a class="nav-title" th:href="@{/board/list}">💻PCworld</a> -->
+		<!-- 비로그인 상태일때 -->
+	    <div class="nav-links">
+			<th:block th:if="${session.loginMember == null}">	<!-- MemberController.java의 loginMember가 null(없음)이라면 아래의 코드를 실행한다. -->
+	        	<a th:href="@{/member/login}">로그인</a>
+	        	<a th:href="@{/member/join}">회원가입</a>
+			</th:block>
+			<!-- 로그인 상태일때 표시 -->
+			<th:block th:unless="${session.loginMember == null}">	<!-- unless는 if의 반대뜻. th:if = "${session.loginMember != null}"라고 써도 된다. -->
+				<span class="nav-name" th:text="${session.loginMember.memberName}">이름</span>님 환영합니다	<!-- MemberControler.java의 loginMember. loginMember는 MemberDTO타입이다. MemberDTO의 getter를 사용해서 memberName을 꺼내온다. -->
+				<a th:href="@{/member/logout}">로그아웃</a>
+				<a th:href="@{/board/write}" class="btn btn-primary" style="font-size:19px; padding:5px 12px;">게시글 쓰기</a>
+			</th:block>
+	    </div>
+	</nav>
+	<div class="logo-box">
+		<a class="logo" th:href="@{/board/list}">💻PCworld</a>
+	</div>
+</body>
+</html>
