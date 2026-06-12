@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <link rel="stylesheet" href="./common.css">
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="@{/csscommon.css}">	<!--static폴더의 css/common.css-->
+    <link rel="stylesheet" href="@{css/login.css}">
 </head>
 <body>
 
-	<!-- fragments 사용 -layout.html의 th:fragment="nav", th:fragment="div"를 이 자리에 삽입 -->
 	<nav th:replace="~{fragments/layout :: nav}"></nav>
 	<div th:replace="~{fragments/layout :: div}"></div>
 
@@ -16,7 +15,7 @@
     <h2>로그인</h2>
 
     <!-- 로그인 실패 시 오류 메시지 표시 (Thymeleaf: th:if="${param.error == 'fail'}") -->
-    <div class="error-msg" th:if="${error=='fail'}">
+    <div class="error-msg" th:if="${erorr=='fail'}">
         아이디 또는 비밀번호가 올바르지 않습니다.
     </div>
 
@@ -24,7 +23,8 @@
         action="/member/login" — POST /member/login 으로 폼 전송
         method="post" — 비밀번호가 URL에 노출되지 않도록 반드시 POST 사용
     -->
-    <form action="#" method="post">
+	<!--action : 폼 데이터(form data)를 서버로 보낼 때 해당 데이터가 도착할 URL을 명시-->
+    <form th:action="@{/member/login}" method="post">
 
         <div class="form-group">
             <label for="loginId">아이디</label>
