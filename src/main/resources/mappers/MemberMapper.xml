@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <!--namespace : 이 xml과 연결할 Mapper 인터페이스 전체 경로-->
+<mapper namespace="com.example.privateproject.mapper.MemberMapper">
+	<!--[회원가입] member 테이블에 새 행 삽입-->
+	<!--parameterType : 아래의 SQL문으로 들어올 데이터(클래스 타입)지정. 여기에서는 MemberDTO를 넘겨줌 -->
+	<insert id="insertMember" parameterType="com.example.privateproject.dto.MemberDTO">
+		INSERT INTO MEMBER(MEMBER_LOGINID, MEMBER_NAME,
+			MEMBER_EMAIL, MEMBER_PWD, MEMBER_PHONE)
+		VALUES(#{memberLoginId}, #{memberName}, #{memberEmail}, #{memberPwd}, #{memberPhone})
+	</insert>
+        
+    <!--MemberMapper의 countByLoginId메서드에서 파라미터 값을 받아온 다음 정수(int)타입을 반환-->
+    <select id="countByLoginId" resultType="int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE MEMBER_LOGINID = #{loginId}
+    </select>
+</mapper>
