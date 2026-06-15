@@ -19,4 +19,15 @@
     	FROM MEMBER
     	WHERE MEMBER_LOGINID = #{loginId}
     </select>
+    
+    <select id="selectByLoginAndPwd" resultType="com.example.privateproject.dto.MemberDTO">
+    	SELECT MEMBER_ID,
+    			MEMBER_LOGINID,
+    			MEMBER_NAME,
+    			MEMBER_EMAIL,
+    			MEMBER_PHONE
+    	FROM MEMBER
+    	WHERE MEMBER_LOGINID = #{loginId}
+			AND MEMBER_PWD = #{pwd}
+    </select>
 </mapper>

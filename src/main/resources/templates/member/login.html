@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <link rel="stylesheet" href="@{/csscommon.css}">	<!--static폴더의 css/common.css-->
-    <link rel="stylesheet" href="@{css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">	<!--static폴더의 css/common.css-->
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 
 	<!-- fragments 사용 -layout.html의 nav를 이 자리에 삽입 -->
 	<nav th:replace="~{fragments/layout :: nav}"></nav>
-	<div th:replace="~{fragments/layout :: div}"></div>
+	<div th:replace="~{fragments/layout :: div-logo}"></div>
 
 <div class="container-sm">
     <h2>로그인</h2>

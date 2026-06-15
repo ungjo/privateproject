@@ -11,4 +11,6 @@ public interface MemberMapper {
 	void insertMember(MemberDTO memberDTO);
 			
 	int countByLoginId(@Param("loginId") String loginId);
+	
+	MemberDTO selectByLoginAndPwd(@Param("loginId") String loginId, @Param("pwd") String pwd);
 }
