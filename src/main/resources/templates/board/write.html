@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성</title>
-    <link rel="stylesheet" href="./common.css">
-    <link rel="stylesheet" href="./board-write.css">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board-write.css}">
 </head>
 <body>
 
-<nav class="nav-bar">
-    <!-- <a class="nav-title" href="./list.html">💻PCworld</a> -->
-    <div class="nav-links">
-        <span class="nav-name">홍길동</span>님 환영합니다
-        &nbsp;
-        <a href="./list.html">로그아웃</a>
-    </div>
-</nav>
-<div class="logo-box">
-	<a class="logo" href="./list.html">💻PCworld</a>
-</div>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<div th:replace="~{fragments/layout :: div-logo}"></div>
 
 <div class="container">
     <h2>게시글 작성</h2>
@@ -27,7 +18,7 @@
         action="/board/write" — POST /board/write 로 폼 전송
         method="post" — 제목·내용을 URL에 노출하지 않기 위해 POST 사용
     -->
-    <form class="write-form" action="#" method="post">
+    <form class="write-form" th:action="@{/board/write}" method="post">
 
         <div class="form-group">
             <label for="boardTitle">제목</label>
@@ -56,7 +47,7 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">등록</button>
-            <a href="./list.html" class="btn btn-secondary">취소</a>
+            <a th:href="@{/board/list}" class="btn btn-secondary">취소</a>
         </div>
 
     </form>
