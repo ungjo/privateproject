@@ -15,14 +15,14 @@
 				m.MEMBER_LOGINID
 		FROM BOARD b
 		JOIN MEMBER m ON b.MEMBER_ID = m.MEMBER_ID
-		<!--<where>
+		<where>
 			<if test="keyword != null and keyword != ''">
 				(b.BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
 				OR m.MEMBER_LOGINID LIKE CONCAT('%', #{keyword}, '%'))
 			</if>
 		</where>
 		ORDER BY b.BOARD_ID DESC
-		LIMIT #{size} OFFSET #{offset}-->
+		LIMIT #{size} OFFSET #{offset}
 	</select>
 	
 	<!--[전체 게시글 수]-->
@@ -33,7 +33,7 @@
 		<where>
 			<if test="keyword != null and keyword != ''">
 				(b.BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
-				OR m.MEMBER_LOGINID LIKE CONCAT('%', #{keyword}, '%'))
+			OR m.MEMBER_LOGINID LIKE CONCAT('%', #{keyword}, '%'))
 			</if>
 		</where>
 	</select>

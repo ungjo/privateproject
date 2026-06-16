@@ -10,7 +10,9 @@ import com.example.privateproject.dto.BoardDTO;
 @Mapper
 public interface BoardMapper {
 //	[게시글 목록]
-	List<BoardDTO> selectAll();
+	List<BoardDTO> selectAll(@Param("offset") int offset,
+							@Param("size") int size,
+							@Param("keyword") String keyword);
 //	[전체 게시글 수]
 	int selectCount(@Param("keyword") String keyword);
 	

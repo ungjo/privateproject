@@ -15,8 +15,8 @@ public class BoardService {
 	private BoardMapper boardMapper;
 	
 //	[게시글 목록]
-	public List<BoardDTO> getBoardList(){
-		return boardMapper.selectAll();
+	public List<BoardDTO> getBoardList(int offset, int size, String keyword){
+		return boardMapper.selectAll(offset, size, keyword);
 	}
 	
 //	[전체 게시글 수]

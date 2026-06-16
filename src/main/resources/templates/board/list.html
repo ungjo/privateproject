@@ -55,7 +55,7 @@
         <tbody>
             <!--게시글 없을 때-->
 			<tr th:if="${#lists.isEmpty(boardList)}">
-				<td colspan="5" class="no-data">등록된 게시글이 없습니다.</td>
+				<td colspan="6" class="no-data">등록된 게시글이 없습니다.</td>
 			</tr>
 			
 			<tr th:each="board : ${boardList}">
@@ -73,10 +73,18 @@
     </table>
 
     <!-- ===== 페이징 ===== -->
-    <!--<div class="pagination">
-         <a th:if="${currentPage > 1}"
-			></a>
-    </div>-->
+    <div class="pagination">
+		<a th:if = "${currentPage > 1}" 
+			th:href="@{/board/list(page=${currentPage - 1}, keyword=${keyword})}">◀ 이전
+		</a>
+		<a th:each="i : ${#numbers.sequence(1, totalPages)}"
+			th:href="@{/board/list(page=${i}, keyword=${keyword})}"
+			th:text="${i}"
+			th:class="${i == currentPage} ? 'active' : ''"></a>
+		<a th:if="${currentPage < totalPages}"
+		   th:href="@{/board/list(page=${currentPage + 1}, keyword=${keyword})}">다음 ▶
+	   </a>
+    </div>
 
 </div>
 </body>

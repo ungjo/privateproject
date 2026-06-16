@@ -26,25 +26,27 @@ public class BoardController {
 //	-----------------
 //	[게시글 목록]
 	@GetMapping("/list")
-	public String list(Model model){
+	public String list(Model model,
+							@RequestParam(value="page", defaultValue = "1") int page,
+							@RequestParam(value="keyword", defaultValue = "") String keyword){
 		
-//		int size = 10;
-//		int offset = (page - 1) * size;
-//		
-		List<BoardDTO> boardList = boardService.getBoardList();
-//		int totalCount = boardService.getBoardCount(keyword);
-//		
-////		페이지 수 계산
-//		int totalPages = (int)Math.ceil((double)totalCount / size);
-//		if(totalPages == 0) {
-//			totalPages = 1;
-//		}
-//		
-////		Model.addAttribute("키", 값)
+		int size = 10;
+		int offset = (page - 1) * size;
+		
+		List<BoardDTO> boardList = boardService.getBoardList(offset, size, keyword);
+		int totalCount = boardService.getBoardCount(keyword);
+		
+//		페이지 수 계산
+		int totalPages = (int)Math.ceil((double)totalCount / size);
+		if(totalPages == 0) {
+			totalPages = 1;
+		}
+		
+//		Model.addAttribute("키", 값)
 		model.addAttribute("boardList", boardList);
-//		model.addAttribute("currentPage", page);
-//		model.addAttribute("totalPages", totalPages);
-//		model.addAttribute("keyword", keyword);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("keyword", keyword);
 		
 		return "board/list";
 	}
