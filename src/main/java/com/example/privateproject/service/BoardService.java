@@ -39,4 +39,14 @@ public class BoardService {
 		boardMapper.insertBoard(boardDTO);
 	}
 	
+//	[게시글 수정]
+	public void updateBoard(BoardDTO boardDTO) {
+		boardMapper.updateBoard(boardDTO);
+	}
+	
+//	[게시글 삭제]
+	public void deleteBoard(int boardId) {
+		boardMapper.deleteBoard(boardId);
+	}
+	
 }
