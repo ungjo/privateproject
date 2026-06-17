@@ -25,8 +25,14 @@ public class BoardService {
 	}
 	
 //	[게시글 상세 조회]
+	public BoardDTO getBoardId(int boardId) {
+		return boardMapper.selectById(boardId);
+	}
 	
 //	[조회수 증가]
+	public void incrementHit(int boardId) {
+		boardMapper.updateHit(boardId);
+	}
 	
 //	[게시글 등록]
 	public void insertBoard(BoardDTO boardDTO) {

@@ -8,6 +8,7 @@
 </head>
 <body>
     <nav th:fragment="nav" class="nav-bar">
+		<a class="nav-title" th:href="@{/board/list}">💻PCworld</a>
 		<!-- 비로그인 상태일때 -->
 	    <div class="nav-links">
 			<th:block th:if="${session.loginMember == null}">	<!-- MemberController.java의 loginMember가 null(없음)이라면 아래의 코드를 실행한다. -->

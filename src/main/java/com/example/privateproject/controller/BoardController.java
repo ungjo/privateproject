@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,29 @@ public class BoardController {
 		return "board/list";
 	}
 	
+//	----------------------
+//	[상세보기] GET /board/detail/1
+	@GetMapping("/detail/{boardId}")
+	public String detail(@PathVariable("boardId") int boardId,
+			Model model, HttpSession session) {
+		
+//		조회수 증가
+		boardService.incrementHit(boardId);
+		BoardDTO board = boardService.getBoardId(boardId);
+		model.addAttribute("board", board);
+		System.out.println(board.getMemberId());
+		
+		
+//		수정, 삭제
+		MemberDTO loginMember = (MemberDTO)session.getAttribute("loginMember");
+		if(loginMember != null) {
+			model.addAttribute("loginMemberId", loginMember.getMemberId());
+			model.addAttribute("loginMemberLoginId", loginMember.getMemberLoginId());
+		}
+		
+		return "board/detail";		
+	}
+	
 //	------------------
 //	[게시글 작성 폼 이동] GET /board/write (로그인 필요)
 	@GetMapping("/write")
@@ -79,4 +103,7 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+//	[수정 처리] POST /board/update/{boardId}
+//	
 }
