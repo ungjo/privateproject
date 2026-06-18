@@ -165,7 +165,6 @@ public class BoardController {
 	}
 	
 //	[게시글 삭제] POST /board/delete/1 (로그인 + 작성자만)
-	
 //	삭제를 POST로 하는 이유
 //	: GET 방식이면 /board/delete/1 
 //	URL을 작성해서 타고 들어가는 것만으로도 삭제될 수 있어서 위험하다
@@ -188,6 +187,18 @@ public class BoardController {
 //		3) 삭제 실행
 		boardService.deleteBoard(boardId);
 		return "redirect:/board/list";
+	}
+	
+//	[Best 댓글(Top3) 목록]
+	@GetMapping("/bestCommentList")
+	public String bestCommentList(Model model) {
+		// 1~3위 게시글 데이터 가져오기
+		List<BoardDTO> bestList = boardService.getBestBoardList();
 		
+		//화면으로 데이터 전달
+		model.addAttribute("boardList", bestList);
+		
+		// templates.board의 best-list.html로 이동
+		return "board/best-list";
 	}
 }

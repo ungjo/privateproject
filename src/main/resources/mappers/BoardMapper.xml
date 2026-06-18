@@ -110,12 +110,18 @@
 			WHERE BOARD_ID = #{boardId}
 	</delete>
 	
-	<!-- [댓글 개수] -->
-	<select id="commentNumber" resultType="int">
-		SELECT c.COMMENT_ID
-		FROM BOARD b
-			JOIN COMMENT c ON b.BOARD_ID = c.BOARD_ID
-		WHERE b.BOARD_ID = #{boardId}
+	<!-- 댓글 Top3 -->
+	<select id="selectBestBoardList" resultType="com.example.privateproject.dto.BoardDTO">      
+	SELECT b.BOARD_ID,
+		   b.BOARD_TITLE,
+		   b.BOARD_HIT,
+		   b.BOARD_DATE,
+		   b.MEMBER_ID,
+		   m.MEMBER_LOGINID,
+		   (SELECT COUNT(*) FROM COMMENT c WHERE c.BOARD_ID = b.BOARD_ID) AS boardCommentCount
+	FROM BOARD b
+	JOIN MEMBER m ON b.MEMBER_ID = m.MEMBER_ID
+	ORDER BY boardCommentCount DESC, b.BOARD_ID DESC LIMIT 3
 	</select>
 	
 </mapper>

@@ -49,9 +49,8 @@ public class BoardService {
 		boardMapper.deleteBoard(boardId);
 	}
 	
-//	[게시글 갯수]
-	public void commentNumber(int commentsNumber) {
-		boardMapper.commentNumber(commentsNumber);
+	public List<BoardDTO> getBestBoardList(){
+		return boardMapper.selectBestBoardList();
 	}
 	
 }

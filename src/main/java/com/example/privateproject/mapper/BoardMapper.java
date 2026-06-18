@@ -31,6 +31,6 @@ public interface BoardMapper {
 //	[게시글 삭제] 게시글 번호에 해당하는 행 삭제
 	void deleteBoard(@Param("boardId") int boardId);
 	
-//	[전체 댓글수]
-	int commentNumber(@Param("commentNumber") int commentNumber);
+//	[Best 댓글(Top3)]
+	List<BoardDTO> selectBestBoardList();
 }

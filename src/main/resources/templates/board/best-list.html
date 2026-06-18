@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>privateproject - 목록</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board-list.css}">
+</head>
+<body>
+
+<!-- ===== 네비게이션 바 ===== -->
+<!-- 비로그인 상태 -->
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<div th:replace="~{fragments/layout :: div-logo}"></div>
+
+<div class="container">
+
+    <!-- ===== 글쓰기 버튼 (로그인 상태에서만 표시) ===== -->
+    <div class="write-btn-area">
+        <a th:href="@{/board/write}" class="btn btn-primary">게시글 쓰기</a>
+    </div>
+
+        <!-- ===== 검색 폼 ===== -->
+        <form class="search-form" th:action="@{/board/list}" method="get">
+            <input type="text" name="keyword" placeholder="제목 또는 작성자 검색" th:value="${keyword}">
+            <button type="submit" class="btn btn-secondary">검색</button>
+            <!-- 검색 중일 때만 전체보기 버튼 표시 -->
+            <a th:if="${keyword != null and keyword != ''}"
+			th:href="@{/board/list}" class="btn">전체보기</a>
+
+            <!-- (Top3)Best 댓글로 이동하는 버튼 -->
+            <div class="toTop3">
+                <a th:href="@{/board/list}">전체 댓글</a>
+            </div>
+        </form>
+
+    <!-- 검색 결과 안내 (검색 중일 때만 표시) -->
+    <!-- <p class="search-keyword">'Spring' 검색 결과</p> -->
+	<p class="search-keyword" th:if="${keyword != null and keyword != ''}">
+		'<strong th:text="${keyword}"></strong>' 검색결과
+	</p>
+
+    <!-- ===== 게시글 목록 테이블 ===== -->
+    <table class="board-table">
+        <thead>
+            <tr>
+                <th style="width:70px">번호</th>
+                <th>제목</th>
+                <th style="width:70px">댓글</th>
+                <th style="width:100px">작성자</th>
+                <th style="width:120px">날짜</th>
+                <th style="width:70px">조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--게시글 없을 때-->
+			<tr th:if="${#lists.isEmpty(boardList)}">
+				<td colspan="6" class="no-data">등록된 게시글이 없습니다.</td>
+			</tr>
+			
+			<tr th:each="board : ${boardList}">
+				<td th:text="${board.boardId}"></td>
+				<td>
+					<a th:href="@{/board/detail/{id}(id=${board.boardId})}"
+								th:text="${board.boardTitle}"></a>
+				</td>
+				<td th:text="${board.boardCommentCount}">0</td>
+				<td th:text="${board.memberLoginId}"></td>
+				<td th:text="${board.boardDate}"></td>
+				<td th:text="${board.boardHit}"></td>
+			</tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
