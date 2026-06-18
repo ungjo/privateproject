@@ -21,7 +21,8 @@
 		   b.BOARD_HIT,
 		   b.BOARD_DATE,
 		   b.MEMBER_ID,
-		   m.MEMBER_LOGINID
+		   m.MEMBER_LOGINID,
+		   (SELECT COUNT(*) FROM COMMENT c WHERE c.BOARD_ID = b.BOARD_ID) AS boardCommentCount
 	FROM BOARD b
 	JOIN MEMBER m ON b.MEMBER_ID = m.MEMBER_ID
 	<where>
@@ -108,6 +109,14 @@
 		DELETE FROM BOARD
 			WHERE BOARD_ID = #{boardId}
 	</delete>
+	
+	<!-- [댓글 개수] -->
+	<select id="commentNumber" resultType="int">
+		SELECT c.COMMENT_ID
+		FROM BOARD b
+			JOIN COMMENT c ON b.BOARD_ID = c.BOARD_ID
+		WHERE b.BOARD_ID = #{boardId}
+	</select>
 	
 </mapper>
 

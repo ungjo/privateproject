@@ -18,4 +18,7 @@ public class BoardDTO {
 	
 	// board테이블 컬럼은 아니지만 작성자의 id를 담기위한 변수
 	private String memberLoginId;	//작성자 id
+	
+	// 댓글수를 담기위한 변수
+	private int boardCommentCount;
 }

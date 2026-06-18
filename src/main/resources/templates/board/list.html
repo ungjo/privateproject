@@ -64,7 +64,7 @@
 					<a th:href="@{/board/detail/{id}(id=${board.boardId})}"
 								th:text="${board.boardTitle}"></a>
 				</td>
-				<td>댓글수</td>
+				<td th:text="${board.boardCommentCount}">0</td>
 				<td th:text="${board.memberLoginId}"></td>
 				<td th:text="${board.boardDate}"></td>
 				<td th:text="${board.boardHit}"></td>
