@@ -49,6 +49,7 @@ public class BoardService {
 		boardMapper.deleteBoard(boardId);
 	}
 	
+//	[댓글 순서 Top3]
 	public List<BoardDTO> getBestBoardList(){
 		return boardMapper.selectBestBoardList();
 	}
